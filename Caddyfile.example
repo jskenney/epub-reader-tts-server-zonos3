@@ -1,0 +1,36 @@
+# Reader at https://example.com/reader/; the TTS paths are on the site root. tts-host is the machine
+# running docker-compose.yml. Make the password hash with:  caddy hash-password
+example.com {
+	basic_auth /reader/* {
+		yourname $2a$14$REPLACE_WITH_THE_HASH
+	}
+	basic_auth /tts* {
+		yourname $2a$14$REPLACE_WITH_THE_HASH
+	}
+
+	# The voice server's API (the adapter in front of ZONOS3).
+	handle_path /tts/* {
+		reverse_proxy tts-host:7860 {
+			flush_interval -1   # stream audio as it is generated
+		}
+	}
+
+	# The voices the reader offers, served by the studio.
+	handle /tts-voices/* {
+		uri replace /tts-voices/ /voices/
+		reverse_proxy tts-host:7861
+	}
+
+	# The voice studio (Caddy serves HTTPS, which microphone recording needs). Caddy doesn't limit upload
+	# sizes, so long recordings upload as they are.
+	handle_path /tts-studio/* {
+		reverse_proxy tts-host:7861 {
+			flush_interval -1
+		}
+	}
+
+	handle /reader/* {
+		root * /srv/www
+		file_server
+	}
+}

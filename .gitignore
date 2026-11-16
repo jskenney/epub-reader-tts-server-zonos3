@@ -1,0 +1,13 @@
+# ZONOS3's model files, generated voice clips and uploads (fetch-models.sh, the studio)
+/models/
+tts-voices/
+tts-sources/
+asr-models/
+*.pcm
+# The Mac setup (mac/setup.sh): ZONOS3's checkout, the Python environments, logs and local settings
+mac/zonos3/
+mac/.venv/
+mac/logs/
+mac/settings.env
+__pycache__/
+.pytest_cache/
