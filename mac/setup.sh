@@ -11,7 +11,7 @@
 set -eu
 
 ZONOS3_URL="https://github.com/Zyphra/ZONOS3-Mini.git"
-ZONOS3_COMMIT="96d9e0ec1e39083ed336ac78f24e3dbc93721c0f"   # as in docker-compose.yml
+ZONOS3_COMMIT="a50e14117d99181ba7f28047b451ba03ba1a09a9"   # as in docker-compose.yml
 
 cd "$(dirname "$0")"
 ROOT=$(cd .. && pwd)

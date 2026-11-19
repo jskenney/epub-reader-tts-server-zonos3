@@ -142,7 +142,9 @@ clip (a few seconds; once per voice while the server runs).
 ZONOS3 is pinned in two places: the commit (`ZONOS3_COMMIT` in `docker-compose.yml` and `mac/setup.sh`) and the
 model revision (`REVISION` in `fetch-models.sh`). Change them together, to a commit and a revision from the same
 day, then `./fetch-models.sh`, `docker compose up -d --build`, and check `adapter/test_app.py` still passes
-(`pytest adapter/test_app.py`, with `fastapi`, `httpx`, `numpy` and `python-multipart`).
+(`pytest adapter/test_app.py`, with `fastapi`, `httpx`, `numpy` and `python-multipart`). The revision can stay as it
+is when the Hub's `gguf/` folder hasn't changed since (compare its files at the two revisions): the commit is then
+only the server's code, and `./fetch-models.sh` has nothing to do.
 
 ## Files
 
